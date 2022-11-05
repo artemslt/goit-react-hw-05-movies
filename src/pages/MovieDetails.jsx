@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams, Outlet } from 'react-router-dom';
 import { GetMovieDetails } from '../API/api';
 import { MovieCard } from '../components/MovieCard/MovieCard';
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { LinkButton } from '../components/LinkButton/LinkButton';
 
 export const MovieDetails = () => {
