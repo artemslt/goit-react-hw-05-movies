@@ -4,7 +4,6 @@ import {
   Wrapper,
   AdditionalInfoWrapper,
 } from './MovieCard.styled';
-import { Link } from 'react-router-dom';
 import { LinkButton } from '../LinkButton/LinkButton';
 
 export const MovieCard = ({
