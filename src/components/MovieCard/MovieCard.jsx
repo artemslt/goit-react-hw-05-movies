@@ -1,5 +1,11 @@
-import { InfoWrapper, Poster, Wrapper } from './MovieCard.styled';
+import {
+  InfoWrapper,
+  Poster,
+  Wrapper,
+  AdditionalInfoWrapper,
+} from './MovieCard.styled';
 import { Link } from 'react-router-dom';
+import { LinkButton } from '../LinkButton/LinkButton';
 
 export const MovieCard = ({
   movie: { title, poster_path, vote_average, overview, genres, release_date },
@@ -23,14 +29,14 @@ export const MovieCard = ({
         <p>{genres?.map(genre => genre.name).join(' ')}</p>
         <div>
           <h4>Additional information</h4>
-          <ul>
+          <AdditionalInfoWrapper>
             <li>
-              <Link to="cast">Cast</Link>
+              <LinkButton to="cast">Cast</LinkButton>
             </li>
             <li>
-              <Link to="reviews">Reviews</Link>
+              <LinkButton to="reviews">Reviews</LinkButton>
             </li>
-          </ul>
+          </AdditionalInfoWrapper>
         </div>
       </InfoWrapper>
     </Wrapper>
