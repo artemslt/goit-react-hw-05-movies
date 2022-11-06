@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useParams, Outlet } from 'react-router-dom';
 import { GetMovieDetails } from '../API/api';
 import { MovieCard } from '../components/MovieCard/MovieCard';
@@ -9,7 +9,7 @@ export const MovieDetails = () => {
   const [movie, setMovie] = useState({});
   const { id } = useParams();
   const location = useLocation();
-  const backLinkHref = location.state?.from ?? '/movies';
+  const backLinkHref = useRef(location.state?.from ?? '/movies');
   console.log('location', location);
 
   useEffect(() => {
@@ -22,7 +22,7 @@ export const MovieDetails = () => {
 
   return (
     <main>
-      <LinkButton to={backLinkHref}>Back</LinkButton>
+      <LinkButton to={backLinkHref.current}>Back</LinkButton>
       <MovieCard movie={movie} />
       <Outlet />
     </main>
