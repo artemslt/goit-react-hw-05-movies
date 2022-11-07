@@ -1,7 +1,11 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import imageNotFaund from '../helpers/images/imgNotFound.jpg';
 import { GetMovieCast } from '../../API/api';
 import { List, Item, ArtistName } from './Cast.styled';
+import { notFindMessage, errorMessage } from '../helpers/Messages';
 
 export const Cast = () => {
   const [cast, setCast] = useState([]);
@@ -10,12 +14,15 @@ export const Cast = () => {
   useEffect(() => {
     GetMovieCast(id)
       .then(res => {
+        if (res.cast.length === 0) {
+          notFindMessage();
+          return;
+        }
         setCast(res.cast);
-        console.log(res.cast);
       })
-      .catch(err => console.log('err', err));
+      .catch(() => errorMessage());
   }, [id]);
-  console.log('cast', cast);
+
   return (
     <div>
       <List>
@@ -23,7 +30,11 @@ export const Cast = () => {
           return (
             <Item key={actor.id}>
               <img
-                src={'https://image.tmdb.org/t/p/w500' + actor.profile_path}
+                src={
+                  actor.profile_path === null
+                    ? imageNotFaund
+                    : `https://image.tmdb.org/t/p/w500${actor.profile_path}`
+                }
                 alt=""
               />
               <ArtistName>{actor.name}</ArtistName>
@@ -31,6 +42,7 @@ export const Cast = () => {
           );
         })}
       </List>
+      <ToastContainer />
     </div>
   );
 };

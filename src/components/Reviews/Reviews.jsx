@@ -1,7 +1,11 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import { GetMovieReviews } from '../../API/api';
 import { List, Item } from './Reviews.styled';
+import { notFindMessage, errorMessage } from '../helpers/Messages';
 
 export const Reviews = () => {
   const [reviews, setReviews] = useState([]);
@@ -10,12 +14,14 @@ export const Reviews = () => {
   useEffect(() => {
     GetMovieReviews(id)
       .then(res => {
+        if (res.results.length === 0) {
+          notFindMessage();
+          return;
+        }
         setReviews(res.results);
-        console.log(res.results);
       })
-      .catch(err => console.log('err', err));
+      .catch(() => errorMessage());
   }, [id]);
-  console.log('reviews', reviews);
 
   return (
     <div>
@@ -29,6 +35,7 @@ export const Reviews = () => {
           );
         })}
       </List>
+      <ToastContainer />
     </div>
   );
 };
