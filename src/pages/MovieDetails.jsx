@@ -39,7 +39,7 @@ const MovieDetails = () => {
 
   return (
     <main>
-      <LinkButton to={backLinkHref}>Back</LinkButton>
+      <LinkButton to={backLinkHref.current}>Back</LinkButton>
       {status === Status.PENDING && <Loader isLoading={true} />}
       <MovieCard
         poster_path={movie.poster_path}
