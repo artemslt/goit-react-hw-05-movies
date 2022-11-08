@@ -1,11 +1,10 @@
-import { useState, useEffect, useRef, Suspense } from 'react';
-import { useParams, Outlet } from 'react-router-dom';
+import { useState, useEffect, Suspense } from 'react';
+import { useParams, Outlet, useLocation } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import { GetMovieDetails } from '../API/api';
 import { MovieCard } from '../components/MovieCard/MovieCard';
-import { useLocation } from 'react-router-dom';
 import { LinkButton } from '../components/LinkButton/LinkButton';
 import { Loader } from '../components/Loader/Loader';
 import { errorMessage } from '../components/helpers/Messages';
@@ -22,8 +21,8 @@ const MovieDetails = () => {
   const [status, setStatus] = useState(Status.IDLE);
   const { id } = useParams();
   const location = useLocation();
-  const backLinkHref = useRef(location.state?.from ?? '/movies');
-
+  const backLinkHref = location.state?.from ?? '/movies';
+  console.log('backLinkHref', backLinkHref);
   useEffect(() => {
     setStatus(Status.PENDING);
 
@@ -40,7 +39,7 @@ const MovieDetails = () => {
 
   return (
     <main>
-      <LinkButton to={backLinkHref.current}>Back</LinkButton>
+      <LinkButton to={backLinkHref}>Back</LinkButton>
       {status === Status.PENDING && <Loader isLoading={true} />}
       <MovieCard
         poster_path={movie.poster_path}
@@ -49,6 +48,7 @@ const MovieDetails = () => {
         overview={movie.overview}
         genres={movie.genres}
         release_date={movie.release_date}
+        location={location}
       />
       <ToastContainer />
       <Suspense fallback={<div>Loading subpage...</div>}>
