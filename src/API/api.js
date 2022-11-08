@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { errorMessage } from '../components/helpers/Messages';
 
 const API_KEY = '93d454aeb43c6f394ac0bb2f4b913efd';
 const BASE_URL = 'https://api.themoviedb.org/3';
@@ -16,7 +17,7 @@ export async function trendMovies(page) {
 
     return res.data;
   } catch (error) {
-    console.log('error :>> ', error);
+    errorMessage();
   }
 }
 
@@ -27,7 +28,7 @@ export async function searchMovies(searchQuery, page) {
     });
     return res.data;
   } catch (error) {
-    console.log('error :>> ', error);
+    errorMessage();
   }
 }
 
@@ -36,17 +37,16 @@ export async function GetMovieDetails(id) {
     const res = await moviedbApi.get(`/movie/${id}`);
     return res.data;
   } catch (error) {
-    console.log('error :>> ', error);
+    errorMessage();
   }
 }
 
 export async function GetMovieCast(id) {
   try {
     const res = await moviedbApi.get(`/movie/${id}/credits`);
-    console.log(res);
     return res.data;
   } catch (error) {
-    console.log('error :>> ', error);
+    errorMessage();
   }
 }
 
@@ -55,6 +55,6 @@ export async function GetMovieReviews(id) {
     const res = await moviedbApi.get(`/movie/${id}/reviews`);
     return res.data;
   } catch (error) {
-    console.log('error :>> ', error);
+    errorMessage();
   }
 }

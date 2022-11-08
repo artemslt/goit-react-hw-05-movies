@@ -7,7 +7,7 @@ import { GetMovieReviews } from '../../API/api';
 import { List, Item } from './Reviews.styled';
 import { notFindMessage, errorMessage } from '../helpers/Messages';
 
-export const Reviews = () => {
+const Reviews = () => {
   const [reviews, setReviews] = useState([]);
   const { id } = useParams();
 
@@ -39,3 +39,5 @@ export const Reviews = () => {
     </div>
   );
 };
+
+export default Reviews;

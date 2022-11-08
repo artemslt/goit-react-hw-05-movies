@@ -12,7 +12,7 @@ const Status = {
   REJECTED: 'rejected',
 };
 
-export const Home = () => {
+const Home = () => {
   const [trends, setTrends] = useState([]);
   const [status, setStatus] = useState(Status.IDLE);
 
@@ -37,3 +37,5 @@ export const Home = () => {
     </main>
   );
 };
+
+export default Home;

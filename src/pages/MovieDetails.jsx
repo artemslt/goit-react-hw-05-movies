@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, Suspense } from 'react';
 import { useParams, Outlet } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -17,7 +17,7 @@ const Status = {
   REJECTED: 'rejected',
 };
 
-export const MovieDetails = () => {
+const MovieDetails = () => {
   const [movie, setMovie] = useState({});
   const [status, setStatus] = useState(Status.IDLE);
   const { id } = useParams();
@@ -42,9 +42,20 @@ export const MovieDetails = () => {
     <main>
       <LinkButton to={backLinkHref.current}>Back</LinkButton>
       {status === Status.PENDING && <Loader isLoading={true} />}
-      <MovieCard movie={movie} />
+      <MovieCard
+        poster_path={movie.poster_path}
+        title={movie.title}
+        vote_average={movie.vote_average}
+        overview={movie.overview}
+        genres={movie.genres}
+        release_date={movie.release_date}
+      />
       <ToastContainer />
-      <Outlet />
+      <Suspense fallback={<div>Loading subpage...</div>}>
+        <Outlet />
+      </Suspense>
     </main>
   );
 };
+
+export default MovieDetails;

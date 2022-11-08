@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 import {
   InfoWrapper,
   Poster,
@@ -7,13 +9,18 @@ import {
 import { LinkButton } from '../LinkButton/LinkButton';
 
 export const MovieCard = ({
-  movie: { title, poster_path, vote_average, overview, genres, release_date },
+  poster_path,
+  title,
+  vote_average,
+  overview,
+  genres,
+  release_date,
 }) => {
   const ratingNormalize = value => {
     const rating = value * 10;
     return rating.toFixed(1) + '%';
   };
-
+ 
   return (
     <Wrapper>
       <Poster src={'https://image.tmdb.org/t/p/w500' + poster_path} alt="" />
@@ -40,4 +47,17 @@ export const MovieCard = ({
       </InfoWrapper>
     </Wrapper>
   );
+};
+
+MovieCard.propTypes = {
+  title: PropTypes.string,
+  poster_path: PropTypes.string,
+  vote_average: PropTypes.number,
+  overview: PropTypes.string,
+  genres: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string,
+    })
+  ),
+  release_date: PropTypes.string,
 };

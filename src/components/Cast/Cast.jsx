@@ -7,7 +7,7 @@ import { GetMovieCast } from '../../API/api';
 import { List, Item, ArtistName } from './Cast.styled';
 import { notFindMessage, errorMessage } from '../helpers/Messages';
 
-export const Cast = () => {
+const Cast = () => {
   const [cast, setCast] = useState([]);
   const { id } = useParams();
 
@@ -46,3 +46,5 @@ export const Cast = () => {
     </div>
   );
 };
+
+export default Cast;

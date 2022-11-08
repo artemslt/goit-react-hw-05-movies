@@ -22,7 +22,7 @@ const Status = {
   REJECTED: 'rejected',
 };
 
-export const Movies = () => {
+const Movies = () => {
   const [movies, setMovies] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
   const [status, setStatus] = useState(Status.IDLE);
@@ -45,8 +45,6 @@ export const Movies = () => {
           setMovies([...movies, ...res.results]);
           findMessage(res.total_results);
           setTotalPages(Math.ceil(res.total_results / 20));
-
-          console.log('movies', res);
         })
         .catch(() => {
           setStatus(Status.REJECTED);
@@ -95,3 +93,5 @@ export const Movies = () => {
     </main>
   );
 };
+
+export default Movies;

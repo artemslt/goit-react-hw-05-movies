@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { Form, Input, Button, Icon } from './SearchForm.styled';
 
 export const SearchForm = ({ handlQuery }) => {
@@ -9,4 +10,8 @@ export const SearchForm = ({ handlQuery }) => {
       </Button>
     </Form>
   );
+};
+
+SearchForm.propTypes = {
+  handlQuery: PropTypes.func.isRequired,
 };
