@@ -1,4 +1,4 @@
-import { useState, useEffect, Suspense } from 'react';
+import { useState, useEffect, Suspense, useRef } from 'react';
 import { useParams, Outlet, useLocation } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -21,8 +21,8 @@ const MovieDetails = () => {
   const [status, setStatus] = useState(Status.IDLE);
   const { id } = useParams();
   const location = useLocation();
-  const backLinkHref = location.state?.from ?? '/movies';
-  console.log('backLinkHref', backLinkHref);
+  const backLinkHref = useRef(location.state?.from ?? '/movies');
+
   useEffect(() => {
     setStatus(Status.PENDING);
 
@@ -48,10 +48,9 @@ const MovieDetails = () => {
         overview={movie.overview}
         genres={movie.genres}
         release_date={movie.release_date}
-        location={location}
       />
       <ToastContainer />
-      <Suspense fallback={<div>Loading subpage...</div>}>
+      <Suspense fallback={<Loader isLoading={true} />}>
         <Outlet />
       </Suspense>
     </main>

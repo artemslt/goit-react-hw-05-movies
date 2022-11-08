@@ -15,17 +15,18 @@ export const MovieCard = ({
   overview,
   genres,
   release_date,
-  location,
 }) => {
   const ratingNormalize = value => {
     const rating = value * 10;
     return rating.toFixed(1) + '%';
   };
 
-  console.log('location', location);
   return (
     <Wrapper>
-      <Poster src={'https://image.tmdb.org/t/p/w500' + poster_path} alt="" />
+      <Poster
+        src={'https://image.tmdb.org/t/p/w500' + poster_path}
+        alt={title}
+      />
       <InfoWrapper>
         <h2>{title}</h2>
         <p>user score: {ratingNormalize(vote_average)}</p>
@@ -39,14 +40,10 @@ export const MovieCard = ({
           <h4>Additional information</h4>
           <AdditionalInfoWrapper>
             <li>
-              <LinkButton to="cast" from={location}>
-                Cast
-              </LinkButton>
+              <LinkButton to="cast">Cast</LinkButton>
             </li>
             <li>
-              <LinkButton to="reviews" from={location}>
-                Reviews
-              </LinkButton>
+              <LinkButton to="reviews">Reviews</LinkButton>
             </li>
           </AdditionalInfoWrapper>
         </div>
