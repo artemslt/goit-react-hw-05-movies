@@ -6,7 +6,7 @@ export const notFindMessage = () => {
   });
 };
 export const findMessage = number => {
-  toast.info(`We find ${number} images`, {
+  toast.info(`We find ${number} movies`, {
     position: toast.POSITION.TOP_RIGHT,
   });
 };
